@@ -58,17 +58,26 @@ class _ResultScreenState extends State<ResultScreen> {
         child: Container(
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.centerRight,
-                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 50),
-                child: Text(
-                  output,
-                  style: TextStyle(fontSize: 50),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 45),
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            output,
+                            style: TextStyle(fontSize: 50),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Expanded(
-                child: Divider(),
-              ),
+              Divider(),
               Column(
                 children: [
                   Row(
@@ -105,8 +114,9 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                   Row(
                     children: [
-                      customButton('0', color: Colors.grey[200]),
                       customButton('.', color: Colors.grey[200]),
+                      customButton('0', color: Colors.grey[200]),
+                      customButton('00', color: Colors.deepOrangeAccent[200]),
                       customButton('=', color: Colors.yellow[300]),
                     ],
                   ),
@@ -158,14 +168,15 @@ class _ResultScreenState extends State<ResultScreen> {
       if (operation == '/') {
         result = (num1 / num2).toString();
       }
-      if (operation == '%') {
-        result = (num1 / 100).toString();
-      }
+
       num1 = 0.0;
       num2 = 0.0;
       operation = "";
     } else {
       result = result + value;
+    }
+    if (operation == '%') {
+      result = (num1 / 100).toString();
     }
     print(result);
     setState(() {
